@@ -48,15 +48,16 @@ app.get('/findByPincode/:pincode', async (req, res) => {
   }
 });
 
-app.put('/updateDetails', async (req, res) => {
-  const { pin, name, updatedDetails } = req.body;
+app.put('/updateDetails/:pincode', async (req, res) => {
+  const { name, updatedDetails } = req.body;
 
   if (!updatedDetails?.email && !updatedDetails?.contactNumber) {
     return res.status(400).json({ message: 'Provide email or contact number to update.' });
   }
 
   try {
-    const pincodeData = await Pincode.findOne({pincode :pin });
+    const pincodeData = await Pincode.findOne({ pincode: req.params.pincode });
+    
     if (!pincodeData) return res.status(404).json({ message: 'Pincode not found' });
 
     const person = pincodeData.details.find(person => person.name === name);
