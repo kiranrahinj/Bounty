@@ -49,14 +49,14 @@ app.get('/findByPincode/:pincode', async (req, res) => {
 });
 
 app.put('/updateDetails', async (req, res) => {
-  const { pincode, name, updatedDetails } = req.body;
+  const { pin, name, updatedDetails } = req.body;
 
   if (!updatedDetails?.email && !updatedDetails?.contactNumber) {
     return res.status(400).json({ message: 'Provide email or contact number to update.' });
   }
 
   try {
-    const pincodeData = await Pincode.findOne({ pincode });
+    const pincodeData = await Pincode.findOne({pincode :pin });
     if (!pincodeData) return res.status(404).json({ message: 'Pincode not found' });
 
     const person = pincodeData.details.find(person => person.name === name);
@@ -78,4 +78,3 @@ app.put('/updateDetails', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
