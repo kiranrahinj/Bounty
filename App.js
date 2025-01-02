@@ -23,7 +23,6 @@ const pincodeSchema = new mongoose.Schema({
       email: {
         type: String,
         required: true,
-        unique: true,
         match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       },
       contactNumber: {
@@ -79,4 +78,3 @@ app.put('/updateDetails', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
