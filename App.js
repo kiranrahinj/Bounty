@@ -5,7 +5,7 @@ const PORT = 3000;
 
 app.use(express.json());
 
-const dbURI = 'mongodb+srv://root:root@maitri.mrckj.mongodb.net/Test?retryWrites=true&w=majority&appName=Maitri';
+const dbURI = "";
 
 mongoose.connect(dbURI)
   .then(() => console.log('Connected to MongoDB Atlas'))
